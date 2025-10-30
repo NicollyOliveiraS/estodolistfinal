@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <title>EsToDoList</title>
+    <style>
+        /* Estilos básicos para o input checkbox parecer um pouco mais desenhado e suave */
+        .form-checkbox {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            border: 2px solid #9ca3af; /* gray-400 */
+            background-color: transparent;
+            width: 1.25rem; /* w-5 */
+            height: 1.25rem; /* h-5 */
+            border-radius: 0.25rem; /* rounded */
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        /* Estilo da caixa marcada (cor de destaque do site de estudos) */
+        .form-checkbox:checked {
+            border-color: #201b81; /* indigo-600 */
+            background-color: #4f46e5; /* indigo-600 */
+            box-shadow: inset 0 0 0 4px #f9fafb; /* gray-50 */
+        }
+        
+        /* Estilo para riscar a tarefa concluída */
+        .task-done {
+            text-decoration: line-through;
+            color: #838690; /* estudo-riscado */
+        }
+        
+        /* Estilo para a lista de tarefas */
+        .task-item {
+            transition: all 0.2s ease;
+        }
+        
+        .task-item:hover {
+            background-color: #f8fafc;
+        }
+    </style>
+    <script>
+        // Configuração para cores mais limpas e amigáveis a um site de estudos
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'estudo-fundo': '#f9fafb', 
+                        'estudo-primario': '#4f46e5', 
+                        'estudo-texto': '#1f2937', 
+                        'estudo-riscado': '#9ca3af', 
+                    },
+                    fontFamily: {
+                        // Use uma fonte sans-serif limpa para um visual de app moderno
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-estudo-fundo text-estudo-texto p-4 flex justify-center items-start pt-14 min-h-screen">
+
+    <div class="w-full max-w-3xl bg-white shadow-xl rounded-lg p-8 relative">
+
+        <header class="text-center mb-6">
+            <h1 class="text-3xl font-extrabold uppercase tracking-wider text-estudo-primario">
+                EsToDOList
+            </h1>
+        </header>
+        
+        <!-- Barra de adicionar tarefa -->
+        <div class="flex items-center mb-8 bg-gray-50 border border-gray-300 rounded-lg p-3">
+            <input type="text" id="nova-tarefa-input" placeholder="Adicione uma tarefa..." class="flex-grow bg-transparent text-lg focus:outline-none placeholder-gray-400 p-1">
+            <button id="adicionar-btn" class="ml-4 p-3 rounded-full text-white bg-estudo-primario hover:bg-indigo-700 transition duration-300 shadow-md">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Filtros e pesquisa -->
+        <div class="flex justify-between items-center mb-6 pb-4 border-b border-gray-200">
+            <div class="flex space-x-2 text-sm font-medium">
+                <button class="filter-btn px-3 py-1 rounded-full text-estudo-texto bg-gray-100 hover:bg-gray-200 transition duration-300" data-filter="todos">Todos</button>
+                <button class="filter-btn px-3 py-1 rounded-full text-estudo-texto bg-gray-100 hover:bg-gray-200 transition duration-300" data-filter="ativos">Pendentes</button>
+                <button class="filter-btn px-3 py-1 rounded-full text-estudo-texto bg-gray-100 hover:bg-gray-200 transition duration-300" data-filter="concluidos">Concluídas</button>
+            </div>
+
+            <div class="flex items-center bg-gray-100 rounded-full px-3 py-1 border border-gray-200 text-sm">
+                <input type="text" id="pesquisa-input" placeholder="Pesquisar tarefa..." class="bg-transparent focus:outline-none w-32 placeholder-gray-500 text-estudo-texto">
+                <svg class="w-4 h-4 ml-1 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+            </div>
+        </div>
+        
+        <!-- Lista de tarefas -->
+        <ul id="lista-de-tarefas" class="space-y-3">
+            <!-- Tarefas serão carregadas aqui dinamicamente -->
+        </ul>
+
+        <!-- Estatísticas -->
+        <div class="mt-6 pt-4 border-t border-gray-200 text-sm text-gray-500">
+            <div class="flex justify-between">
+                <span id="total-tarefas">Total: 0 tarefas</span>
+                <span id="tarefas-concluidas">Concluídas: 0</span>
+            </div>
+        </div>
+
+    </div>
+    <script src="script.js"></script>
+
+</body>
+</html>
