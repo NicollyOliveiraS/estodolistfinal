@@ -56,4 +56,4 @@ Para executar o **EsToDoList** em seu ambiente local, siga os passos abaixo:
 
     > **Nota:** Não é necessário um servidor web para esta aplicação, pois ela utiliza apenas recursos front-end (HTML, CSS e JavaScript).
     
-    Veja o projeto na vercel: https://estodolistfinal-o9sc6cjt6-nicollys-projects-97e5c013.vercel.app
+    Veja o projeto na vercel: https://estodolistfinal.vercel.app/
